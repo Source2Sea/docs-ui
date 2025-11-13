@@ -1,0 +1,48 @@
+body.-toc aside.toc.sidebar {
+  display: none;
+}
+
+@media screen and (max-width: 1023.5px) {
+  aside.toc.sidebar {
+    display: none;
+  }
+
+  main > .content {
+    overflow-x: auto;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  main {
+    flex: auto;
+    min-width: 0; /* min-width: 0 required for flexbox to constrain overflowing elements */
+  }
+
+  main > .content {
+    display: flex;
+    max-width: 88rem; /* 1232px @ 14px root */
+    margin: 0 auto; /* center content box within main area */
+    column-gap: 2rem; /* spacing between doc and toc */
+  }
+
+  aside.toc.embedded {
+    display: none;
+  }
+
+  /* Fix main content width to desktop max width */
+  .doc {
+    flex: 0 0 var(--doc-max-width--desktop);
+    margin: 0; /* remove side margins inside centered container */
+  }
+
+  aside.toc.sidebar {
+    flex: 0 0 var(--toc-width);
+    order: 1;
+  }
+}
+
+@media screen and (min-width: 1216px) {
+  aside.toc.sidebar {
+    flex-basis: var(--toc-width--widescreen);
+  }
+}

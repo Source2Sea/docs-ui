@@ -1,0 +1,53 @@
+.breadcrumbs {
+  display: none;
+  flex: 1 1;
+  padding: 0 0.25rem; /* tighter, minimal */
+  line-height: var(--nav-line-height);
+  color: var(--toolbar-font-color);
+}
+
+@media screen and (min-width: 1024px) {
+  .breadcrumbs {
+    display: block;
+  }
+}
+
+a + .breadcrumbs {
+  padding-left: 0.05rem;
+}
+
+.breadcrumbs ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs li {
+  display: inline;
+  margin: 0;
+}
+
+.breadcrumbs li::after {
+  content: "/";
+  padding: 0 0.5rem;
+}
+
+.breadcrumbs li:last-of-type::after {
+  content: none;
+}
+
+.breadcrumbs a {
+  color: var(--toolbar-font-color);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--link-font-color);
+  text-decoration: underline;
+}
+
+.breadcrumbs li:last-of-type {
+  color: var(--doc-font-color);
+}

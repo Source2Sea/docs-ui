@@ -1,0 +1,41 @@
+name: Release UI Bundle
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: antora-ui-default-master
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16.x'
+          cache: 'npm'
+          cache-dependency-path: antora-ui-default-master/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NPM_CONFIG_LEGACY_PEER_DEPS: 'true'
+
+      - name: Build UI bundle
+        run: npx gulp bundle
+
+      - name: Create GitHub Release and upload bundle
+        uses: softprops/action-gh-release@v2
+        with:
+          files: antora-ui-default-master/build/ui-bundle.zip
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

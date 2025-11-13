@@ -1,0 +1,43 @@
+name: UI CI
+
+on:
+  push:
+    paths:
+      - '../..'
+      - 'ui-ci.yml'
+  pull_request:
+    paths:
+      - '../..'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: antora-ui-default-master
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16.x'
+          cache: 'npm'
+          cache-dependency-path: antora-ui-default-master/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NPM_CONFIG_LEGACY_PEER_DEPS: 'true'
+
+      - name: Build UI bundle
+        run: npx gulp bundle
+
+      - name: Upload ui-bundle artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-bundle
+          path: antora-ui-default-master/build/ui-bundle.zip
+          if-no-files-found: error
+

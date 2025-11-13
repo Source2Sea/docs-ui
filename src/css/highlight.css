@@ -1,0 +1,55 @@
+/*! Source2Sea dark navy-friendly highlight.js theme */
+.hljs {
+  background: transparent; /* container provides background */
+  color: #e6eaf1; /* base code color on dark navy */
+  display: block;
+  overflow-x: auto;
+}
+
+/* Comments */
+.hljs-comment,
+.hljs-quote {
+  color: #8aa0b5;
+  font-style: italic;
+}
+
+/* Keywords, selectors, important */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-meta.keyword,
+.hljs-doctag { color: #80d4ff; }
+
+/* Types, classes, attrs */
+.hljs-type,
+.hljs-attr,
+.hljs-attribute,
+.hljs-class .hljs-title { color: #d6b3ff; }
+
+/* Numbers, literals */
+.hljs-number,
+.hljs-literal { color: #f2b179; }
+
+/* Strings */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet { color: #9ae6b4; }
+
+/* Functions, titles */
+.hljs-title,
+.hljs-title.function_,
+.hljs-function .hljs-title { color: #b3d4ff; }
+
+/* Variables, params, builtins */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-built_in,
+.hljs-builtin-name { color: #ff9aa2; }
+
+/* Regexp, links, operators */
+.hljs-regexp,
+.hljs-link,
+.hljs-meta { color: #7dd3fc; }
+
+/* Emphasis and strong */
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: var(--monospace-font-weight-bold); }

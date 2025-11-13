@@ -1,0 +1,93 @@
+.toolbar {
+  color: var(--toolbar-font-color);
+  align-items: center;
+  background-color: var(--body-background); /* solid background behind breadcrumbs */
+  box-shadow: none; /* keep borderless for a soft look */
+  display: flex;
+  font-size: calc(14 / var(--rem-base) * 1rem); /* match body */
+  height: var(--toolbar-height);
+  justify-content: flex-start;
+  position: sticky;
+  top: var(--navbar-height);
+  z-index: var(--z-index-toolbar);
+}
+
+/* Center toolbar content to align with main content box */
+.toolbar-inner {
+  display: flex;
+  align-items: center;
+  height: var(--toolbar-height);
+  max-width: 88rem; /* match main > .content width */
+  margin: 0 auto;
+  width: 100%;
+}
+
+.toolbar a {
+  color: inherit;
+}
+
+.nav-toggle {
+  background: url(../img/menu.svg) no-repeat 50% 47.5%;
+  background-size: 49%;
+  border: none;
+  outline: none;
+  line-height: inherit;
+  padding: 0;
+  height: var(--toolbar-height);
+  width: var(--toolbar-height);
+  margin-right: -0.25rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .nav-toggle {
+    display: none;
+  }
+}
+
+.nav-toggle.is-active {
+  background-image: url(../img/back.svg);
+  background-size: 41.5%;
+}
+
+.home-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--toolbar-height) / 1.8);
+  height: var(--toolbar-height); /* use full toolbar height for vertical centering */
+  margin: 0; /* no vertical offset */
+  padding: 0 0.25rem; /* subtle horizontal spacing */
+  color: var(--toolbar-font-color);
+  text-decoration: none;
+}
+
+.home-link::before {
+  font-family: "Material Symbols Outlined", sans-serif;
+  content: "home";
+  font-size: 1.2em;
+  line-height: 1;
+  position: relative;
+  top: -1px; /* nudge up to align with text baseline */
+  font-variation-settings: "OPSZ" 20, "wght" 400, "FILL" 0, "GRAD" 0;
+}
+
+.home-link:hover::before,
+.home-link.is-current::before {
+  font-variation-settings: "OPSZ" 20, "wght" 400, "FILL" 1, "GRAD" 0;
+  color: var(--link-font-color);
+}
+
+.edit-this-page {
+  display: none;
+  padding-right: 0.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .edit-this-page {
+    display: block;
+  }
+}
+
+.toolbar .edit-this-page a {
+  color: var(--toolbar-muted-color);
+}
