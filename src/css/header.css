@@ -45,7 +45,10 @@ body {
 .navbar .navbar-item:hover,
 .navbar .navbar-link:hover,
 .navbar .navbar-menu .navbar-item:hover {
-  background-color: var(--navbar_hover-background);
+  background: transparent;
+  background-color: transparent;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 .navbar-brand {
@@ -66,6 +69,42 @@ body {
   font-size: calc(18 / var(--rem-base) * 1rem);
   flex-wrap: wrap;
   line-height: var(--doc-line-height);
+}
+
+/* Ensure logo matches brand text size and spacing */
+/* Brand block: logo as background with title below */
+.navbar-brand .navbar-item.brand {
+  position: relative;
+  display: inline-block;
+  height: var(--navbar-height);
+  padding: 0;
+}
+
+.navbar-brand .brand-logo {
+  display: block;
+  width: calc(140 / var(--rem-base) * 1rem);
+  height: calc(28 / var(--rem-base) * 1rem);
+  background: url('../img/logo.png') left center / contain no-repeat;
+  position: relative;
+  left: -16px; /* nudge slightly left */
+  top: 4px;   /* move down by 5px */
+}
+
+.navbar-brand .brand-title {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  color: inherit;
+  font-size: calc(18 / var(--rem-base) * 1rem);
+  line-height: 1;
+  margin: 0;
+}
+
+/* Override default right padding for stacked brand elements */
+.navbar-brand .navbar-item.brand :not(:last-child) {
+  padding-right: 0;
 }
 
 .navbar-brand .navbar-item:first-child a {
@@ -111,7 +150,7 @@ body {
 /* Ensure mobile/expanded menu matches navbar theme */
 .navbar .navbar-menu { background: var(--navbar-background); }
 .navbar .navbar-menu .navbar-item { color: var(--navbar-font-color); }
-.navbar .navbar-item:hover { opacity: 0.95; }
+.navbar .navbar-item:hover { opacity: 1; }
 
 .navbar-burger {
   background: none;
@@ -260,7 +299,9 @@ body {
 
   .navbar-menu a.navbar-item:hover,
   .navbar-menu .navbar-link:hover {
-    background: var(--navbar-menu_hover-background);
+    background: transparent;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
   }
 }
 
@@ -314,7 +355,9 @@ body {
   .navbar-end > a.navbar-item:hover,
   .navbar-end .navbar-link:hover,
   .navbar-end .navbar-item.has-dropdown:hover .navbar-link {
-    background: var(--navbar_hover-background);
+    background: transparent;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
     color: var(--navbar-font-color);
   }
 
@@ -354,6 +397,8 @@ body {
   }
 
   .navbar-dropdown a.navbar-item:hover {
-    background: var(--navbar-menu_hover-background);
+    background: transparent;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
   }
 }
