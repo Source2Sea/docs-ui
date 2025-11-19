@@ -47,6 +47,12 @@ body {
 .navbar .navbar-menu .navbar-item:hover {
   background: transparent;
   background-color: transparent;
+}
+
+/* Only underline the hovered link itself, not all siblings */
+.navbar .navbar-item > a:hover,
+.navbar .navbar-link:hover,
+.navbar .navbar-menu .navbar-item > a:hover {
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
@@ -78,6 +84,9 @@ body {
   display: inline-block;
   height: var(--navbar-height);
   padding: 0;
+  /* prevent wrapping and ensure a wider clickable brand area */
+  white-space: nowrap;
+  min-width: calc(240 / var(--rem-base) * 1rem);
 }
 
 .navbar-brand .brand-logo {
@@ -100,6 +109,7 @@ body {
   font-size: calc(18 / var(--rem-base) * 1rem);
   line-height: 1;
   margin: 0;
+  white-space: nowrap;
 }
 
 /* Override default right padding for stacked brand elements */
@@ -119,6 +129,26 @@ body {
 .navbar-brand .navbar-item.search {
   flex: auto;
   justify-content: flex-end;
+}
+
+/* Configurable header links shown after the brand */
+.navbar-brand .header-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: 1rem;
+  white-space: nowrap;
+}
+
+.navbar-brand .header-links .header-link {
+  color: inherit;
+  text-decoration: none;
+  padding: 0;
+}
+
+.navbar-brand .header-links .header-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 #search-input {
@@ -351,6 +381,8 @@ body {
   .navbar-end .navbar-link {
     color: var(--navbar-font-color);
   }
+
+  /* Header links visible by default */
 
   .navbar-end > a.navbar-item:hover,
   .navbar-end .navbar-link:hover,

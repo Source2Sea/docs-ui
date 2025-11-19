@@ -1,8 +1,13 @@
 antoraVersion: '1.0.0'
+
 site:
   url: http://localhost:5252
-  title: Brand Docs
+  title: Internal Developer Portal
   homeUrl: &home_url /xyz/5.2/index.html
+  keys:
+    search:
+      enabled: true
+      provider: lunr
   components:
   - name: abc
     title: Project ABC
@@ -52,11 +57,46 @@ site:
       version: '2.0'
       displayVersion: '2.0'
     latestVersion: *latest_version_123
+
+asciidoc:
+  attributes:
+    header_links: |-
+      [
+        { "text": "Home", "url": "/" },
+        { "text": "Guides", "page": "docs::getting-started.adoc" },
+        { "text": "All Docs", "page": "docs::landing.adoc" },
+        { "text": "API", "url": "/api/index.html", "ariaLabel": "API Reference" },
+        { "text": "GitHub 213", "url": "https://github.com/open-example/repo", "target": "_blank", "rel": "noopener" }
+      ]
+    landing_projects: |-
+      [
+        { "name": "Authentication", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers",
+          "projects": [
+            { "page": "docs::getting-started.adoc", "icon": "account-cog", "title": "IAM", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers"},
+            { "page": "docs::getting-started.adoc", "icon": "shield-account", "title": "STS", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers"}
+          ] },
+         { "name": "Runtime catalog", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers",
+          "projects": [
+            { "page": "docs::getting-started.adoc", "icon": "package-variant-closed", "title": "Warehouse", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers"},
+            { "page": "docs::getting-started.adoc", "icon": "cash-multiple", "title": "Wallstreet", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers"},
+            { "page": "docs::getting-started.adoc", "icon": "file-image", "title": "Codex", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers"},
+            { "page": "docs::getting-started.adoc", "icon": "file-sign", "title": "Sopimus", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers"},
+            { "page": "docs::getting-started.adoc", "icon": "text-search", "title": "Sherlock", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers"},
+            { "page": "docs::getting-started.adoc", "icon": "shape", "title": "Curator", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers"}
+          ] },
+        { "name": "Infrastructure", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers",
+          "projects": [
+            { "page": "docs::getting-started.adoc", "icon": "network", "title": "Network", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers"},
+            { "page": "docs::getting-started.adoc", "icon": "kubernetes", "title": "Kubernetes", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers"},
+            { "page": "docs::getting-started.adoc", "icon": "key-variant", "title": "Getting Access", "description": "Provides centralized, tenant-aware access control for Source2Sea. It manages Accounts, Roles, Policies, and OAuth Clients, evaluates policies at runtime, and integrates with external Identity Providers"}
+          ] }
+      ]
 page:
   url: *home_url
   home: true
   title: Brand&#8217;s Hardware &amp; Software Requirements
   component: *component
+  nav_icon: shape
   componentVersion: *component_version
   version: '5.2'
   displayVersion: '5.2'
@@ -124,3 +164,38 @@ page:
       - content: Some Code
         url: '/xyz/5.2/index.html#some-code'
         urlType: internal
+      hero:
+        page: landing-hero.adoc
+
+# ---
+# Examples of using playbook AsciiDoc attributes (for older Antora versions):
+#
+# asciidoc:
+#   attributes:
+#     header_links: |-
+#       [
+#         { "text": "Home", "url": "/" },
+#         { "text": "Guides", "page": "docs::getting-started.adoc" },
+#         { "text": "GitHub", "url": "https://github.com/org/repo", "target": "_blank", "rel": "noopener" }
+#       ]
+#     landing_nav_title: Explore
+#     landing_navigation: |-
+#       [
+#         { "content": "Introduction", "page": "docs::index.adoc" },
+#         { "content": "User Guide", "items": [
+#           { "content": "Install", "page": "docs::install.adoc" },
+#           { "content": "Usage", "page": "docs::usage.adoc" }
+#         ]}
+#       ]
+#     project_categories: |-
+#       [
+#         { "head": { "title": "Core" }, "items": [
+#           { "title": "Docs", "page": "docs::index.adoc" },
+#           { "text": "GitHub", "url": "https://github.com/org/repo" }
+#         ]}
+#       ]
+#     projects: |-
+#       [
+#         { "title": "Docs", "page": "docs::index.adoc" },
+#         { "text": "External", "url": "https://example.com" }
+#       ]

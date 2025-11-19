@@ -184,6 +184,62 @@
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
+/* Custom landing left nav icon sizing */
+.landing-nav .nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+}
+
+.landing-nav .nav-icon .mdi {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+/* In landing nav, show the left accent on the LI (container) only */
+.landing-nav .nav-link,
+.landing-nav .nav-text {
+  border-left: 0; /* remove link-level accent */
+  padding-left: 0; /* shift padding to LI */
+}
+
+.landing-nav .nav-item {
+  border-left: 2px solid transparent;
+  padding-left: 0.5rem;
+}
+
+.landing-nav .nav-item:hover {
+  border-left-color: var(--link_hover-font-color);
+}
+
+.landing-nav .nav-item:hover > .nav-link,
+.landing-nav .nav-item:hover > .nav-text {
+  color: var(--link-font-color);
+}
+
+/* Current page emphasis mirrors default, but on LI */
+.landing-nav .nav-item.is-current-page {
+  border-left-color: var(--link-font-color);
+}
+
+.landing-nav .nav-item.is-current-page > .nav-link,
+.landing-nav .nav-item.is-current-page > .nav-text {
+  color: var(--doc-font-color);
+  font-weight: var(--body-font-weight-bold);
+}
+
+/* Remove underline from links in landing nav */
+.landing-nav .nav-link,
+.landing-nav .nav-text,
+.landing-nav .nav-link:hover,
+.landing-nav .nav-text:hover,
+.landing-nav .nav-link:focus,
+.landing-nav .nav-text:focus {
+  text-decoration: none;
+}
+
 .nav-link:hover,
 .nav-text:hover {
   color: var(--link-font-color);

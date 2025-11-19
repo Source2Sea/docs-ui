@@ -6,7 +6,19 @@
           <span class="brand-logo" aria-hidden="true"></span>
           <span class="brand-title">{{site.title}}</span>
         </a>
-        {{#if env.SITE_SEARCH_PROVIDER}}
+
+        {{#with (or (from-json page.attributes.header_links)
+                    (from-json @root.asciidoc.attributes.header_links))}}
+        <div class="navbar-item header-links">
+            {{#each this}}
+            <a class="header-link"
+               href="{{{or (and url (relativize url)) (relativize (resolvePageURL page))}}}"{{#if target}} target="{{target}}"{{/if}}{{#if rel}} rel="{{rel}}"{{/if}}{{#if ariaLabel}} aria-label="{{ariaLabel}}"{{/if}}>
+              {{or text content}}
+            </a>
+            {{/each}}
+        </div>
+        {{/with}}
+        {{#if (or env.SITE_SEARCH_PROVIDER site.keys.search.provider site.keys.search.enabled)}}
         <div class="navbar-item search hide-for-print">
           <div id="search-field" class="field">
             <input id="search-input" type="text" placeholder="Search the docs"{{#if page.home}} autofocus{{/if}}>
@@ -21,7 +33,6 @@
       </div>
       <div id="topbar-nav" class="navbar-menu">
         <div class="navbar-end">
-          <a class="navbar-item" href="/docs/all-docs.html">All Docs</a>
           <a class="navbar-item" href="/docs/contributing.html">Contributing</a>
         </div>
       </div>

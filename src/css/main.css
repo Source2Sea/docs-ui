@@ -41,6 +41,250 @@ body.-toc aside.toc.sidebar {
   }
 }
 
+/* Landing layout */
+.landing-main {
+  flex: auto;
+  min-width: 0;
+}
+
+.landing-hero {
+  position: relative;
+  margin-bottom: 4rem; /* align with section spacing */
+  background-color: var(--nav-background);
+  padding: 0; /* use inner container for horizontal padding */
+  overflow: hidden;
+}
+
+.landing-title {
+  margin: 0 0 0.25rem 0;
+  color: var(--link-font-color);
+  font-weight: var(--alt-heading-font-weight);
+  line-height: 1.3; /* match doc heading line-height */
+}
+
+.landing-lead {
+  color: var(--doc-font-color);
+  margin: 0 0 1.5rem;
+}
+
+/* removed tint overlay to exactly match nav background */
+
+.landing-hero-inner {
+  position: relative; /* stack above tint overlay */
+}
+
+/* Use doc line-height to match site typography */
+.landing-hero,
+.landing-hero p,
+.landing-hero li {
+  line-height: var(--doc-line-height);
+}
+
+/* Keep headings proportional like in doc */
+.landing-hero h1,
+.landing-hero h2,
+.landing-hero h3,
+.landing-hero h4,
+.landing-hero h5,
+.landing-hero h6 {
+  line-height: 1.3;
+}
+
+/* Center and align hero content with main content */
+.landing-hero-container {
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: 2.5rem 1rem; /* extra top/bottom spacing, match horizontal padding of sections */
+}
+
+/* Hero image beside content (uses ship.svg as mask) */
+.landing-hero-figure {
+  display: none; /* hidden on small screens */
+}
+
+@media screen and (min-width: 769px) {
+  .landing-hero-container {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr; /* make image column slightly narrower to allow longer headline */
+    align-items: center;
+    column-gap: 2rem;
+  }
+
+  .landing-hero-figure {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 22rem; /* larger visual impact */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-mask-image: url('../img/pngwing.com.png');
+    mask-image: url('../img/pngwing.com.png');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+}
+
+@media screen and (min-width: 1216px) {
+  .landing-hero-figure {
+    min-height: 28rem; /* bigger on widescreen */
+  }
+}
+
+.landing-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: stretch; /* make items fill row height */
+  /* Align inner content of edge cards with section content */
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.landing-section {
+  max-width: 88rem;
+  margin: 0 auto 4rem; /* moved spacing below each category */
+  padding: 0.5rem 1rem; /* equal top/bottom padding */
+}
+
+.landing-category {
+  margin-top: 1.5rem;
+}
+
+.category-head-inner {
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: 0 1rem 0.5rem;
+  text-align: center; /* center-align category header content */
+}
+
+.landing-category-title {
+  margin: 0 0 0.75rem;
+  color: var(--heading-font-color);
+  font-weight: var(--alt-heading-font-weight);
+  text-align: center; /* ensure title is centered */
+  line-height: 1.3; /* match heading rhythm */
+}
+
+/* Category header description copy */
+.category-head-inner p {
+  line-height: var(--doc-line-height);
+}
+
+/* Limit width of category title + description on larger screens */
+@media screen and (min-width: 769px) {
+  .category-head-inner .landing-category-title,
+  .category-head-inner p {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .landing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 1216px) {
+  .landing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.landing-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* equal height cards within a row */
+  border-radius: 0.35rem;
+  padding: 1rem;
+  color: inherit;
+  text-decoration: none;
+  min-height: 8rem;
+}
+
+/* Never underline landing cards as links */
+.landing-card:hover,
+.landing-card:focus {
+  text-decoration: none;
+}
+
+.landing-card .card-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-card .card-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Material icon inside card icon */
+.landing-card .card-icon .material-symbols-outlined {
+  font-family: "Material Symbols Outlined", sans-serif;
+  font-variation-settings: "OPSZ" 24, "wght" 400, "FILL" 0, "GRAD" 0;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--link-font-color);
+}
+
+/* Pictogrammers MDI icon inside card icon */
+.landing-card .card-icon .mdi {
+  font-size: 1.5rem; /* slightly larger */
+  line-height: 1;
+  color: var(--link-font-color);
+}
+
+/* Inline icon with title */
+.landing-card .card-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: var(--alt-heading-font-weight);
+  font-size: 1.25rem;
+  color: var(--heading-font-color);
+  margin-bottom: 0.25rem;
+}
+
+.landing-card .card-title .card-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0; /* no bottom margin when inline */
+}
+
+.landing-card .card-title .card-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.landing-card .card-title .card-icon .mdi {
+  font-size: 1.2rem; /* slightly larger */
+  line-height: 1;
+}
+
+.landing-card .card-title .card-icon .material-symbols-outlined {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* removed duplicate .landing-card .card-title block (merged into earlier rule) */
+
+.landing-card .card-desc {
+  color: var(--doc-font-color);
+  line-height: var(--doc-line-height);
+}
+
 @media screen and (min-width: 1216px) {
   aside.toc.sidebar {
     flex-basis: var(--toc-width--widescreen);

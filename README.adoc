@@ -30,6 +30,99 @@ NOTE: This repository is a Source2Sea-specific customization of the Antora Defau
 While the default UI is ready to be used with Antora, the intent is that you'll fork it and customize it for your own needs.
 It's intentionally minimalistic so as to give you a good starting point without requiring too much effort to customize.
 
+== Navigation Customization (Source2Sea additions)
+
+This customization adds simple, playbook-driven configuration for the top navigation links and the landing page cards without requiring a custom UI bundle rebuild.
+
+IMPORTANT: This UI does not use `site.keys.header.links`. Instead, it reads links from page‑scoped AsciiDoc attributes so they can be set globally in the playbook and made available to every page.
+
+=== Top Header Links (global configuration)
+
+Define the links once in your Antora playbook under `asciidoc.attributes.page-header_links`. Antora applies these attributes to every page, and the UI reads them as `page.attributes.header_links`.
+
+[source,yaml]
+----
+asciidoc:
+  attributes:
+    # Global header links for all pages (JSON array)
+    page-header_links: |-
+      [
+        { "text": "Home", "url": "/" },
+        { "text": "Guides", "page": "docs::getting-started.adoc" },
+        { "text": "API", "url": "/api/index.html", "ariaLabel": "API Reference" },
+        { "text": "GitHub", "url": "https://github.com/your/repo", "target": "_blank", "rel": "noopener" }
+      ]
+----
+
+Supported fields per link:
+
+- `text` (or `content`): the label to show
+- `url` or `page`: external URL or a page spec (e.g., `docs::index.adoc`); `page` is resolved to a site URL
+- Optional: `target`, `rel`, `ariaLabel`
+
+Per-page override (optional): Set `:page-header_links:` in any page to replace the global links on that page.
+
+[source,asciidoc]
+----
+:page-header_links: [{"text":"Home","url":"/"},{"text":"Guides","page":"docs::getting-started.adoc"}]
+----
+
+Note: Hyphenated or underscored variants are handled (`page-header_links` → `header_links`).
+
+=== Landing Categories (global configuration)
+
+The landing page now requires categories. Every project card must appear inside a category. There is no fallback to a flat projects list or discovered components.
+
+Configure categories globally in your Antora playbook under `asciidoc.attributes.project_categories` (JSON array). The UI reads this value and renders the landing sections accordingly.
+
+[source,yaml]
+----
+asciidoc:
+  attributes:
+    project_categories: |-
+      [
+        {
+          "head": { "title": "Core" },
+          "items": [
+            { "component": "xyz", "title": "Project XYZ", "description": "Guides and API references", "icon": "/images/xyz.svg" },
+            { "page": "docs::index.adoc", "title": "Docs Index", "description": "Overview", "icon": "/images/docs.svg" }
+          ]
+        },
+        {
+          "head": { "title": "Ecosystem" },
+          "items": [
+            { "component": "abc", "title": "Project ABC", "description": "Tutorials" },
+            { "component": "123", "title": "Project 123", "description": "Developer docs" }
+          ]
+        }
+      ]
+----
+
+Category shape:
+
+- `head`: one of
+  - `title`: plain text heading
+  - `html`: raw HTML for advanced headings
+  - `page` or `url`: optional banner source (page is resolved via the site)
+- `items`: array of cards; each supports:
+  - one of `page`, `url`, or `component`
+  - optional `title`/`text`, `icon`, `description`
+
+Per-page override (optional): On the landing page, set `:page-project_categories:` to replace the global categories just for that page.
+
+[source,asciidoc]
+----
+:page-project_categories: [{"head":{"title":"Core"},"items":[{"page":"docs::index.adoc","title":"Docs"}]}]
+----
+
+=== Notes and compatibility
+
+- Global header links are configured through `asciidoc.attributes.page-header_links` in the playbook; this ensures they are available on every page as `page.attributes.header_links`.
+- The UI also tolerates `page-header-links` and will read it if present.
+- Landing cards require `asciidoc.attributes.project_categories`; there is no flat projects or auto-discovered fallback.
+- The legacy keys `site.keys.headerLinks` or `site.keys.links` and `site.keys.header.links` are not used by this customization.
+- Link objects support `page` specs; these are resolved to site URLs by the UI.
+
 == Code of Conduct
 
 The Antora project and its project spaces are governed by our https://gitlab.com/antora/antora/-/blob/HEAD/CODE-OF-CONDUCT.adoc[Code of Conduct].

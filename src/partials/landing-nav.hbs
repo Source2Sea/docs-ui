@@ -1,0 +1,28 @@
+<div class="nav-container"{{#if page.component}} data-component="{{page.component.name}}" data-version="{{page.version}}"{{/if}}>
+  <aside class="nav landing-nav">
+    <div class="panels">
+      <div class="nav-panel-menu is-active">
+        <nav class="nav-menu" aria-label="Landing navigation">
+          {{#with (or (from-json page.attributes.landing_projects)
+                      (from-json @root.asciidoc.attributes.landing_projects))}}
+            {{#each this}}
+              <h3 class="title">{{name}}</h3>
+              <ul class="nav-list">
+                {{#each projects}}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{relativize (resolvePageURL page)}}">
+                      {{#if icon}}
+                        <span class="nav-icon" aria-hidden="true">{{{render-icon icon}}}</span>
+                      {{/if}}
+                      <span class="nav-text">{{title}}</span>
+                    </a>
+                  </li>
+                {{/each}}
+              </ul>
+            {{/each}}
+          {{/with}}
+        </nav>
+      </div>
+    </div>
+  </aside>
+</div>

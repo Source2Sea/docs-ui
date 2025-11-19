@@ -1,0 +1,18 @@
+:page-layout: landing
+:page-hero-page: landing-hero.adoc
+
+:description: Explore all projects and their docs.
+
+
+
+
+= Welcome to the Source2Sea developer hub
+
+your starting point for understanding, building, and extending the systems that power our platform. This page brings together all core projects, libraries, and services so you can quickly find what you need and get productive fast.
+
+*On this page you’ll find:*
+
+- Project categories that group related services, libraries, and tools
+- Clear descriptions explaining the purpose of each project
+- Guidance on how components fit together across the platform
+- Links to documentation, code, and onboarding resources

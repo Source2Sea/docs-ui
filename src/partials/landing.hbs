@@ -1,0 +1,54 @@
+<main class="landing-main">
+  {{#if (or page.attributes.hero-page page.attributes.hero-url)}}
+  <section class="landing-hero" data-landing-hero-src="{{{relativize (or (resolvePageURL page.attributes.hero-page) page.attributes.hero-url)}}}">
+    <div class="landing-hero-container">
+      <div class="landing-hero-inner">
+        <h1 class="landing-title">{{or page.title site.title}}</h1>
+        {{{page.contents}}}
+      </div>
+      {{#if page.attributes.hero-image}}
+      <div class="landing-hero-figure" style="background-image: url('{{page.attributes.hero-image}}')"></div>
+      {{else}}
+      <div class="landing-hero-figure" style="background-image: url('{{{uiRootPath}}}/img/hero.jpg')"></div>
+      {{/if}}
+    </div>
+  </section>
+  {{/if}}
+
+  {{#with (or (from-json @root.asciidoc.attributes.landing_projects) (from-json page.attributes.landing_projects))}}
+  <section class="landing-category">
+      {{#each this}}
+        <div class="category-head" data-category-head-src="{{{relativize (or (resolvePageURL url) url)}}}">
+          <div class="category-head-inner">
+            <h1 class="landing-category-title">{{name}}</h1>
+            <p>
+              {{#if description}}
+                {{description}}
+              {{/if}}
+            </p>
+          </div>
+        </div>
+      <div class="landing-section">
+
+        <div class="landing-grid">
+          {{#each projects}}
+            <a class="landing-card" href="{{relativize (resolvePageURL page)}}">
+              <span class="card-title">
+                {{#if icon}}
+                  <span class="card-icon" aria-hidden="true">{{{render-icon icon}}}</span>
+                {{/if}}
+                {{title}}
+              </span>
+              {{#if description}}
+                <div class="card-desc">{{description}}</div>
+              {{/if}}
+            </a>
+          {{/each}}
+        </div>
+      </div>
+      {{/each}}
+  </section>
+  {{/with}}
+
+
+</main>
